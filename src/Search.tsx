@@ -1,4 +1,4 @@
-import {ApolloClient, gql, HttpLink, InMemoryCache} from "@apollo/client";
+import {gql} from "@apollo/client";
 import {useSearchParams} from "react-router";
 import {useQuery} from "@apollo/client/react";
 
@@ -12,21 +12,34 @@ const searchQuery = gql`
         }
     }`;
 
+type SearchResponse = {
+    characters: Characters
+}
+type Characters = {
+    results: Character[]
+}
+type Character = {
+    id: number,
+    name: string
+}
+
 const Search = () => {
     const [searchParams] = useSearchParams();
-    const variables = {search: searchParams.get('q'), page: 1};
-    const {loading, error, data} = useQuery(searchQuery, {
-        variables: variables
-    });
+    const searchTerm = searchParams.get('q')||'';
+    const variables = {search: searchTerm, page: 1};
+    const {loading, error, data} = useQuery<SearchResponse, typeof variables>(
+        searchQuery,
+        {variables: variables}
+    );
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
     return(
       <div>
-          <h1>You searched for: {searchParams.get('q')}</h1>
-          <ul>
+          <h1>You searched for: {searchTerm}</h1>
+          {data && <ul>
               {data.characters.results.map(character => <li key={character.id}>{character.name}</li>)}
-          </ul>
+          </ul>}
       </div>
     );
 }

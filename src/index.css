@@ -1,5 +1,6 @@
-@layer reset, base, components, utilities;
+@layer reset, base, layout, components, utilities;
 
 @import 'reset.css';
 @import 'base.css';
+@import 'layout.css';
 @import 'components.css';

@@ -1,6 +1,7 @@
 import {gql} from "@apollo/client";
 import {useSearchParams} from "react-router";
 import {useQuery} from "@apollo/client/react";
+import styles from './Search.module.css';
 
 const searchQuery = gql`
     query GetCharacters($page: Int!, $search: String!) {
@@ -35,7 +36,7 @@ const Search = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
     return(
-      <div>
+      <div className={styles.searchLayout}>
           <h1>You searched for: {searchTerm}</h1>
           {data && <ul>
               {data.characters.results.map(character => <li key={character.id}>{character.name}</li>)}

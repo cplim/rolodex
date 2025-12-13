@@ -1,3 +1,17 @@
+.homeLayout {
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
 .logo {
   display: inline;
   margin: 1.5em;
@@ -33,6 +47,6 @@
   padding: 2em;
 }
 
-.read-the-docs {
+.readTheDocs {
   color: #888;
 }

@@ -26,7 +26,7 @@ type Character = {
 
 const Search = () => {
     const [searchParams] = useSearchParams();
-    const searchTerm = searchParams.get('q')||'';
+    const searchTerm = searchParams.get('q') || '';
     const variables = {search: searchTerm, page: 1};
     const {loading, error, data} = useQuery<SearchResponse, typeof variables>(
         searchQuery,
@@ -35,13 +35,21 @@ const Search = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
-    return(
-      <div className={styles.searchLayout}>
-          <h1>You searched for: {searchTerm}</h1>
-          {data && <ul>
-              {data.characters.results.map(character => <li key={character.id}>{character.name}</li>)}
-          </ul>}
-      </div>
+    return (
+        <div className={styles.layout}>
+            <header>
+                Header
+            </header>
+            <main>
+                <h1>You searched for: {searchTerm}</h1>
+                {data && <ul>
+                    {data.characters.results.map(character => <li key={character.id}>{character.name}</li>)}
+                </ul>}
+            </main>
+            <footer>
+                Footer
+            </footer>
+        </div>
     );
 }
 

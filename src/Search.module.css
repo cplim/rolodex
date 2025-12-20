@@ -30,19 +30,29 @@
     padding: 2em;
 
     flex-shrink: 0;
-    height: calc(100% / 2);
+    height: 300px;
     aspect-ratio: 0.8;
 
     scroll-snap-align: center;
 
     animation: slide;
-    animation-timeline: view();
+    animation-timeline: view(block);
 
     &:nth-child(odd) {
         background-color: #888888;
     }
     &:nth-child(even) {
         background-color: bisque;
+    }
+    &:first-child {
+        animation: none;
+        height: 70px;
+        background-color: white;
+    }
+    &:last-child {
+        animation: none;
+        height: 140px;
+        background-color: white;
     }
 }
 

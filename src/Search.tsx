@@ -7,8 +7,9 @@ const searchQuery = gql`
     query GetCharacters($page: Int!, $search: String!) {
         characters(page: $page, filter: {name: $search}) {
             results {
-                id,
+                id
                 name
+                image
             }
         }
     }`;
@@ -21,7 +22,8 @@ type Characters = {
 }
 type Character = {
     id: number,
-    name: string
+    name: string,
+    image: string
 }
 
 const Search = () => {
@@ -42,20 +44,11 @@ const Search = () => {
             </header>
             <main className={styles.carousel}>
                 <div className={styles.card}></div>
-                <div className={styles.card}>1</div>
-                <div className={styles.card}>2</div>
-                <div className={styles.card}>3</div>
-                <div className={styles.card}>4</div>
-                <div className={styles.card}>5</div>
-                <div className={styles.card}>6</div>
-                <div className={styles.card}>7</div>
-                <div className={styles.card}>8</div>
-                <div className={styles.card}>9</div>
-                <div className={styles.card}>10</div>
-                <div className={styles.card}>11</div>
-                <div className={styles.card}>12</div>
-                <div className={styles.card}>13</div>
-                <div className={styles.card}>14</div>
+                {data?.characters.results.map((character) => (
+                    <div key={character.id} className={styles.card}>
+                        <img src={character.image} alt={character.name}/>
+                    </div>
+                ))}
                 <div className={styles.card}></div>
             </main>
             <footer>

@@ -44,14 +44,9 @@
     &:nth-child(even) {
         background-color: bisque;
     }
-    &:first-child {
+    &:first-child, &:last-child {
         animation: none;
         height: 70px;
-        background-color: white;
-    }
-    &:last-child {
-        animation: none;
-        height: 140px;
         background-color: white;
     }
 }

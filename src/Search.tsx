@@ -40,11 +40,23 @@ const Search = () => {
             <header>
                 Header
             </header>
-            <main>
-                <h1>You searched for: {searchTerm}</h1>
-                {data && <ul>
-                    {data.characters.results.map(character => <li key={character.id}>{character.name}</li>)}
-                </ul>}
+            <main className={styles.carousel}>
+                <div className={styles.card}></div>
+                <div className={styles.card}>1</div>
+                <div className={styles.card}>2</div>
+                <div className={styles.card}>3</div>
+                <div className={styles.card}>4</div>
+                <div className={styles.card}>5</div>
+                <div className={styles.card}>6</div>
+                <div className={styles.card}>7</div>
+                <div className={styles.card}>8</div>
+                <div className={styles.card}>9</div>
+                <div className={styles.card}>10</div>
+                <div className={styles.card}>11</div>
+                <div className={styles.card}>12</div>
+                <div className={styles.card}>13</div>
+                <div className={styles.card}>14</div>
+                <div className={styles.card}></div>
             </main>
             <footer>
                 Footer

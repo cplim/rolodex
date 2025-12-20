@@ -12,3 +12,51 @@
         position: sticky;
     }
 }
+
+.carousel {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    overflow-y: auto;
+
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.card {
+    width: 300px;
+    margin: 1em auto;
+    padding: 2em;
+
+    flex-shrink: 0;
+    height: calc(100% / 2);
+    aspect-ratio: 0.8;
+
+    scroll-snap-align: center;
+
+    animation: slide;
+    animation-timeline: view();
+
+    &:nth-child(odd) {
+        background-color: #888888;
+    }
+    &:nth-child(even) {
+        background-color: bisque;
+    }
+}
+
+@keyframes slide {
+    /* from start to 45%, and to the end (100%) */
+    45%, 100% {
+        transform: scale(0.5);
+        border-radius: 20px;
+        filter: blur(6px) brightness(.8);
+    }
+    /* middle */
+    50% {
+        transform: scale(1);
+        border-radius: 4px;
+        filter: none;
+    }
+}

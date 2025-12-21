@@ -17,8 +17,8 @@ createRoot(document.getElementById('root')!).render(
         <BrowserRouter>
             <StrictMode>
                 <Routes>
-                    <Route index element={<Home />} />
-                    <Route path='search' element={<Search />} />
+                    <Route index element={<Search />} />
+                    <Route path='old-home' element={<Home />} />
                 </Routes>
             </StrictMode>
         </BrowserRouter>

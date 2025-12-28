@@ -1,7 +1,6 @@
 import './CharacterCard.css';
 
 export interface CharacterCardProps {
-    id: number;
     name: string;
     image: string;
     species?: string;
@@ -10,7 +9,6 @@ export interface CharacterCardProps {
 }
 
 export const CharacterCard = ({
-    id: _id,
     name,
     image,
     species,

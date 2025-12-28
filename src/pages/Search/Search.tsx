@@ -54,7 +54,6 @@ const Search = () => {
                 {data?.characters.results.map((character) => (
                     <CharacterCard
                         key={character.id}
-                        id={character.id}
                         name={character.name}
                         image={character.image}
                         species={character.species}

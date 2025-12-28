@@ -2,6 +2,7 @@ import {gql} from "@apollo/client";
 import {useSearchParams} from "react-router";
 import {useQuery} from "@apollo/client/react";
 import styles from './Search.module.css';
+import { CharacterCard } from '../../components/CharacterCard';
 
 const searchQuery = gql`
     query GetCharacters($page: Int!, $search: String!) {
@@ -10,6 +11,9 @@ const searchQuery = gql`
                 id
                 name
                 image
+                species
+                status
+                gender
             }
         }
     }`;
@@ -23,7 +27,10 @@ type Characters = {
 type Character = {
     id: number,
     name: string,
-    image: string
+    image: string,
+    species?: string,
+    status?: string,
+    gender?: string
 }
 
 const Search = () => {
@@ -43,13 +50,19 @@ const Search = () => {
                 Header
             </header>
             <main className={styles.carousel}>
-                <div className={styles.card}></div>
+                <div className={styles.spacer}></div>
                 {data?.characters.results.map((character) => (
-                    <div key={character.id} className={styles.card}>
-                        <img src={character.image} alt={character.name}/>
-                    </div>
+                    <CharacterCard
+                        key={character.id}
+                        id={character.id}
+                        name={character.name}
+                        image={character.image}
+                        species={character.species}
+                        status={character.status}
+                        gender={character.gender}
+                    />
                 ))}
-                <div className={styles.card}></div>
+                <div className={styles.spacer}></div>
             </main>
             <footer>
                 Footer

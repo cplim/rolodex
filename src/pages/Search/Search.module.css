@@ -24,44 +24,8 @@
     scrollbar-width: none;
 }
 
-.card {
-    width: 300px;
-    margin: 1em auto;
-    padding: 2em;
-
+.spacer {
     flex-shrink: 0;
-    height: 300px;
-    aspect-ratio: 0.8;
-
-    scroll-snap-align: center;
-
-    animation: slide;
-    animation-timeline: view(block);
-
-    &:nth-child(odd) {
-        background-color: #888888;
-    }
-    &:nth-child(even) {
-        background-color: bisque;
-    }
-    &:first-child, &:last-child {
-        animation: none;
-        height: 70px;
-        background-color: white;
-    }
-}
-
-@keyframes slide {
-    /* from start to 45%, and to the end (100%) */
-    45%, 100% {
-        transform: scale(0.5);
-        border-radius: 20px;
-        filter: blur(6px) brightness(.8);
-    }
-    /* middle */
-    50% {
-        transform: scale(1);
-        border-radius: 4px;
-        filter: none;
-    }
+    height: 70px;
+    background-color: transparent;
 }

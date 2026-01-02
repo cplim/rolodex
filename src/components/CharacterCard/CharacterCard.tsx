@@ -1,4 +1,5 @@
 import './CharacterCard.css';
+import { TEST_IDS } from '../../test/test-ids';
 
 export interface CharacterCardProps {
     name: string;
@@ -16,10 +17,10 @@ export const CharacterCard = ({
     gender
 }: CharacterCardProps) => {
     return (
-        <div className="card">
+        <div className="card" data-testid={TEST_IDS.CHARACTER_CARD}>
             <img
                 src={image}
-                alt={name}
+                alt={`${name} character`}
                 className="image"
             />
             <div className="content">
@@ -32,7 +33,10 @@ export const CharacterCard = ({
                 {status && (
                     <p className="detail">
                         <span className="label">Status:</span>
-                        <span className={`status ${status.toLowerCase()}`}>
+                        <span
+                            className={`status ${status.toLowerCase()}`}
+                            data-testid={TEST_IDS.CHARACTER_STATUS}
+                        >
                             {status}
                         </span>
                     </p>

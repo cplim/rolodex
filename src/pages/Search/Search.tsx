@@ -23,15 +23,15 @@ type SearchResponse = {
     characters: Characters
 }
 type Characters = {
-    results: Character[]
+    results: (Character | null)[]
 }
 type Character = {
     id: number,
-    name: string,
-    image: string,
-    species?: string,
-    status?: string,
-    gender?: string
+    name: string | null,
+    image: string | null,
+    species?: string | null,
+    status?: string | null,
+    gender?: string | null
 }
 
 const Search = () => {
@@ -46,7 +46,11 @@ const Search = () => {
     if (loading) return <p data-testid={TEST_IDS.SEARCH_LOADING}>Loading...</p>;
     if (error) return <p data-testid={TEST_IDS.SEARCH_ERROR}>Error :(</p>;
 
-    const hasResults = data?.characters.results && data.characters.results.length > 0;
+    // Filter out null characters and check if we have valid results
+    const validCharacters = data?.characters.results
+        ? data.characters.results.filter((character): character is Character => character !== null)
+        : [];
+    const hasResults = validCharacters.length > 0;
 
     return (
         <div className={styles.layout}>
@@ -56,7 +60,7 @@ const Search = () => {
             <main className={styles.carousel} data-testid={TEST_IDS.SEARCH_RESULTS}>
                 <div className={styles.spacer}></div>
                 {hasResults ? (
-                    data.characters.results.map((character) => (
+                    validCharacters.map((character) => (
                         <CharacterCard
                             key={character.id}
                             name={character.name}

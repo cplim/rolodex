@@ -134,4 +134,101 @@ describe('CharacterCard', () => {
     expect(screen.getByRole('heading', { name: "Rick's Clone #42" })).toBeInTheDocument()
     expect(screen.getByAltText("Rick's Clone #42 character")).toBeInTheDocument()
   })
+
+  describe('Null/Undefined Handling', () => {
+    const placeholderImage = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200"%3E%3Crect fill="%23cccccc" width="200" height="200"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23666" font-family="Arial" font-size="16"%3ENo Image%3C/text%3E%3C/svg%3E'
+
+    it('handles null name with fallback', () => {
+      const propsWithNullName = {
+        name: null,
+        image: 'https://example.com/character.jpg',
+      }
+
+      render(<CharacterCard {...propsWithNullName} />)
+
+      expect(screen.getByRole('heading', { name: 'Unknown Character' })).toBeInTheDocument()
+      expect(screen.getByAltText('Unknown Character character')).toBeInTheDocument()
+    })
+
+    it('handles undefined name with fallback', () => {
+      const propsWithUndefinedName = {
+        name: undefined,
+        image: 'https://example.com/character.jpg',
+      }
+
+      render(<CharacterCard {...propsWithUndefinedName} />)
+
+      expect(screen.getByRole('heading', { name: 'Unknown Character' })).toBeInTheDocument()
+      expect(screen.getByAltText('Unknown Character character')).toBeInTheDocument()
+    })
+
+    it('handles empty string name with fallback', () => {
+      const propsWithEmptyName = {
+        name: '',
+        image: 'https://example.com/character.jpg',
+      }
+
+      render(<CharacterCard {...propsWithEmptyName} />)
+
+      expect(screen.getByRole('heading', { name: 'Unknown Character' })).toBeInTheDocument()
+      expect(screen.getByAltText('Unknown Character character')).toBeInTheDocument()
+    })
+
+    it('handles null image with placeholder SVG', () => {
+      const propsWithNullImage = {
+        name: 'Rick Sanchez',
+        image: null,
+      }
+
+      render(<CharacterCard {...propsWithNullImage} />)
+
+      const image = screen.getByAltText('Rick Sanchez character')
+      expect(image).toBeInTheDocument()
+      expect(image).toHaveAttribute('src', placeholderImage)
+    })
+
+    it('handles undefined image with placeholder SVG', () => {
+      const propsWithUndefinedImage = {
+        name: 'Rick Sanchez',
+        image: undefined,
+      }
+
+      render(<CharacterCard {...propsWithUndefinedImage} />)
+
+      const image = screen.getByAltText('Rick Sanchez character')
+      expect(image).toBeInTheDocument()
+      expect(image).toHaveAttribute('src', placeholderImage)
+    })
+
+    it('handles both null name and image', () => {
+      const propsWithNullValues = {
+        name: null,
+        image: null,
+      }
+
+      render(<CharacterCard {...propsWithNullValues} />)
+
+      expect(screen.getByRole('heading', { name: 'Unknown Character' })).toBeInTheDocument()
+      const image = screen.getByAltText('Unknown Character character')
+      expect(image).toBeInTheDocument()
+      expect(image).toHaveAttribute('src', placeholderImage)
+    })
+
+    it('handles null optional fields gracefully', () => {
+      const propsWithNullOptionals = {
+        name: 'Rick Sanchez',
+        image: 'https://example.com/rick.jpg',
+        species: null,
+        status: null,
+        gender: null,
+      }
+
+      render(<CharacterCard {...propsWithNullOptionals} />)
+
+      expect(screen.getByRole('heading', { name: 'Rick Sanchez' })).toBeInTheDocument()
+      expect(screen.queryByText('Species:')).not.toBeInTheDocument()
+      expect(screen.queryByText('Status:')).not.toBeInTheDocument()
+      expect(screen.queryByText('Gender:')).not.toBeInTheDocument()
+    })
+  })
 })

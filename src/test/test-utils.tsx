@@ -1,6 +1,7 @@
-import { render as rtlRender, RenderOptions } from '@testing-library/react'
-import { ReactElement, ReactNode } from 'react'
-import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client'
+import { render as rtlRender, type RenderOptions } from '@testing-library/react'
+import type { ReactElement, ReactNode } from 'react'
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client/react'
 import { createMemoryRouter, RouterProvider } from 'react-router'
 
 /**
@@ -20,7 +21,7 @@ export function createTestApolloClient() {
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   withRouter?: boolean
   withApollo?: boolean
-  client?: ApolloClient<any>
+  client?: ApolloClient
   initialRoute?: string
 }
 

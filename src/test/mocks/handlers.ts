@@ -6,11 +6,9 @@ import { createCharactersResponse, mockCharacters } from './fixtures'
  * These handlers intercept network requests during tests
  */
 
-const GRAPHQL_ENDPOINT = 'https://rickandmortyapi.com/graphql'
-
 export const handlers = [
   // Default handler for GetCharacters query
-  graphql.query('GetCharacters', ({ query, variables }) => {
+  graphql.query('GetCharacters', ({ variables }) => {
     const { search } = variables as { search: string; page: number }
 
     // Return Rick when searching for "rick"
